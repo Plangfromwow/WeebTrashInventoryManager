@@ -1,0 +1,24 @@
+<!-- 
+<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+
+<table *ngIf="forecasts">
+    <thead>
+        <tr>
+            <th>ThisButt</th>
+            <th>Temp. (C)</th>
+            <th>ss. (F)</th>
+            <th>Summary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let forecast of forecasts">
+            <td>{{ forecast.date }}</td>
+            <td>{{ forecast.temperatureC }}</td>
+            <td>{{ forecast.temperatureF }}</td>
+            <td>{{ forecast.summary }}</td>
+        </tr>
+    </tbody>
+</table> -->
+<a href="/AddItem">Add Item Link</a>
+<a href="/">Home</a>
+<router-outlet></router-outlet>

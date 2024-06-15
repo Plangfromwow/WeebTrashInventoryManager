@@ -1,0 +1,6 @@
+@WeebTrashInventoryManager.Server_HostAddress = http://localhost:5052
+
+GET {{WeebTrashInventoryManager.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
