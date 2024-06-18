@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WeebTrashInventoryManager
 {
-    internal class ScannedInventoryItem
+    public class ScannedInventoryItem
     {
         [Name("BARCODE SCAN")]
         public string BarcodeScan { get; set; }
@@ -84,5 +84,16 @@ namespace WeebTrashInventoryManager
         {
             return $"Scanned Item: {Title} {Description} {Category} {SubCategory} {Price} {ShippingProfile} ";
         }
+    }
+
+
+
+    public class JsonResponseModel
+    {
+        public string? Message { get; set; }
+        public string? StatusCode { get; set; }
+        public object? ResponseObject { get; set; }
+        public List<object>? ResponseObjects { get; set; }
+
     }
 }

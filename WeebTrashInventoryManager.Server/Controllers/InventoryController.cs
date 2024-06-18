@@ -4,82 +4,41 @@ using Microsoft.AspNetCore.Mvc;
 namespace WeebTrashInventoryManager.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Inventory")]
     public class InventoryController : Controller
     {
-        // GET: InventoryController
-        public ActionResult Index()
+        public CsvInteractor csvInteractor { get; } = new CsvInteractor();
+
+        [HttpGet("AllItems")]
+        public List<ScannedInventoryItem> GetItems()
         {
-            return View();
+            List<ScannedInventoryItem> items = new List<ScannedInventoryItem>();
+            string path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
+
+            items = csvInteractor.ReadFromCSV<ScannedInventoryItem>(path);
+            Console.WriteLine("GetItems Controller hit");
+            return items;
+
         }
 
-        // GET: InventoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: InventoryController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: InventoryController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public object AddItemsToMetaData([FromBody] List<ScannedInventoryItem> items)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                string path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
+                csvInteractor.AppendToCSV<ScannedInventoryItem>(path, items);
 
-        // GET: InventoryController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+                return new JsonResponseModel { Message = "Success", StatusCode = "200" };
+            }
+            catch (Exception ex) 
+            { 
+                return new JsonResponseModel { Message = $"Failed: {ex.Message}",StatusCode = "500" };
+            }
 
-        // POST: InventoryController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: InventoryController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: InventoryController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
         }
     }
 }

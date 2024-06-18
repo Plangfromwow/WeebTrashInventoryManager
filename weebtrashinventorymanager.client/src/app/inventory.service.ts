@@ -12,7 +12,7 @@ export class InventoryService {
 
   //Gets
   getInventoryItems(cb: any) {
-    this.http.get("/inventory").subscribe(cb);
+    this.http.get("/inventory/AllItems").subscribe(cb);
   }
 
   getInventoryItemFromScan(cb: any, id: string) {

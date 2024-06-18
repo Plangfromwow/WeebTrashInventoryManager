@@ -1,6 +1,22 @@
 <p>add-inventory-item works!</p>
 
 
-<input type="text" [(ngModel)]="item.barcodeScan" placeholder="Scan Me">
+<input type="text" [(ngModel)]="item.barcodeScan" placeholder="Scan Me"  class="input"/>
+<input type="text" [(ngModel)]="item.category" placeholder="Category" class="input" />
+<input type="text" [(ngModel)]="item.subCategory" placeholder="Category" class="input" />
+<input type="text" [(ngModel)]="item.description" placeholder="Category" class="input" />
+<input type="text" [(ngModel)]="item.price" placeholder="Category" class="input" />
+<input type="text" [(ngModel)]="item.quantity" placeholder="Category" class="input" />
+<input type="text" [(ngModel)]="item.shippingProfile" placeholder="Category" class="input" />
 
-<button (click)="buttonSubmit()">Save BUtton</button>
+
+
+
+
+
+
+<button (click)="buttonSubmit()" class="btn">Save Button</button>
+<br />
+<ng-container *ngFor="let i of items">
+ {{i.barcodeScan}} - {{i.title}} - {{i.description}} <br/>
+</ng-container>

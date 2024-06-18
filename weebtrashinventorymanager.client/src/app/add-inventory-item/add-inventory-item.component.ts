@@ -11,7 +11,12 @@ import { InventoryService } from '../inventory.service';
 
 export class AddInventoryItemComponent {
 
-  constructor(private inventory: InventoryService) { }
+  constructor(private inventoryS: InventoryService) {
+    inventoryS.getInventoryItems((result: ScannedInventoryItem[]) => {
+      this.items = result;
+    })
+
+  }
 
   item: ScannedInventoryItem =
     {
@@ -36,6 +41,11 @@ export class AddInventoryItemComponent {
       imageURL7: '',
       imageURL8: ''
     };
+
+  items: ScannedInventoryItem[] = [];
+
+
+
 
   buttonSubmit() {
     let barcodeScan: String = this.item.barcodeScan.toString();

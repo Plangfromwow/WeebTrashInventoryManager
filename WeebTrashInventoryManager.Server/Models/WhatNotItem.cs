@@ -3,7 +3,7 @@ using CsvHelper.Configuration.Attributes;
 
 namespace WeebTrashInventoryManager
 {
-    internal class WhatNotItem
+    public class WhatNotItem
     {
         [Name("Category")]
         public string Category { get; set; }

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace WeebTrashInventoryManager
 {
-    public static class CsvInteractor
+    public  class CsvInteractor
     {
 
         //All functions need to be generic 
         // Read 
 
-        public static List<T> ReadFromCSV<T>(string path)
+        public  List<T> ReadFromCSV<T>(string path)
         {
             List<T> list = new List<T>();
             //Reading from a CSV 
@@ -33,6 +33,8 @@ namespace WeebTrashInventoryManager
                 {
                     Console.WriteLine(e.Message);
                 }
+                csv.Dispose();
+                reader.Dispose();
             }
 
             return list;
@@ -41,7 +43,7 @@ namespace WeebTrashInventoryManager
         //Write functions
         //CreateNewFileWrite 
 
-        public static void WriteToNewCSV<T>(string path, List<T> list)
+        public  void WriteToNewCSV<T>(string path, List<T> list)
         {
 
             using (var writer = new StreamWriter(path))
@@ -53,7 +55,7 @@ namespace WeebTrashInventoryManager
 
         //Append 
 
-        public static void AppendToCSV<T>(string path, List<T> list)
+        public  void AppendToCSV<T>(string path, List<T> list)
         {
             var appendConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -68,5 +70,7 @@ namespace WeebTrashInventoryManager
                 csv.WriteRecords(list);
             }
         }
+
+
     }
 }
