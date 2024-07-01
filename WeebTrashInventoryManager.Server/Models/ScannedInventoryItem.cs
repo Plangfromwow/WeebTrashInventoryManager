@@ -80,6 +80,8 @@ namespace WeebTrashInventoryManager
 
         }
 
+        
+
         public override string ToString()
         {
             return $"Scanned Item: {Title} {Description} {Category} {SubCategory} {Price} {ShippingProfile} ";

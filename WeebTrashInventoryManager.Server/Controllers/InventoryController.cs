@@ -1,44 +1,89 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 
 namespace WeebTrashInventoryManager.Server.Controllers
 {
     [ApiController]
     [Route("Inventory")]
-    public class InventoryController : Controller
-    {
-        public CsvInteractor csvInteractor { get; } = new CsvInteractor();
+    public class InventoryController : Controller 
+    { 
+        public static List<ScannedInventoryItem> MetaData { get; set; }
+        public CsvInteractor csvInteractor { get; set; }
+        public static List<ScannedInventoryItem> itemsToAdd { get; set; }
+
+        public InventoryController() 
+        {
+            if (csvInteractor == null)
+            {
+                csvInteractor = new CsvInteractor();
+            }
+            if (MetaData == null)
+                MetaData = csvInteractor.GetMetaData();
+            if(itemsToAdd == null)
+                itemsToAdd = new List<ScannedInventoryItem>();
+        }
 
         [HttpGet("AllItems")]
         public List<ScannedInventoryItem> GetItems()
         {
-            List<ScannedInventoryItem> items = new List<ScannedInventoryItem>();
-            string path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
-
-            items = csvInteractor.ReadFromCSV<ScannedInventoryItem>(path);
             Console.WriteLine("GetItems Controller hit");
-            return items;
+            return itemsToAdd;
+        }
+
+        [HttpGet("AddItem")]
+        public object AddItem(string id)
+        {
+            Console.WriteLine("Get items controller hit.");
+            bool exists = false;
+            foreach (ScannedInventoryItem item in MetaData)
+            {
+                if (item.BarcodeScan == id)
+                {
+                    foreach(var j in itemsToAdd)
+                    {
+                        if (j.BarcodeScan == id)
+                        {
+                            exists = true;
+                            int quantity = int.Parse(j.Quantity);
+                            quantity += 1;
+                            j.Quantity = quantity.ToString();
+                            break;
+                        }
+                    }
+                    if(exists == false)
+                        itemsToAdd.Add(item);
+                    return new JsonResponseModel { Message="Success", ResponseObject = itemsToAdd, StatusCode= "200" };
+                    
+                }
+            }
+
+            return new JsonResponseModel { Message = "Item not found", ResponseObject = itemsToAdd, StatusCode = "404"};
+        }
+
+        public class ScannedItemResponse
+        {
+            public string BarcodeScan { get; set; }
+            public string Message { get; set; }
+
 
         }
 
-        [HttpPost]
-        public object AddItemsToMetaData([FromBody] List<ScannedInventoryItem> items)
+
+        [HttpGet("CreateWhatNotCSV")]
+        public object CreateWhatNotCSV()
         {
-            try
+
+            List<WhatNotItem> whatNotItems = new List<WhatNotItem>();
+            foreach (var item in itemsToAdd) 
             {
-                string path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
-                csvInteractor.AppendToCSV<ScannedInventoryItem>(path, items);
-
-                return new JsonResponseModel { Message = "Success", StatusCode = "200" };
-            }
-            catch (Exception ex) 
-            { 
-                return new JsonResponseModel { Message = $"Failed: {ex.Message}",StatusCode = "500" };
+                whatNotItems.Add(item.ConvertScannedToWhatnot());
             }
 
+            csvInteractor.CreateNewWhatNotCSV(whatNotItems);
 
-
-
+            return new JsonResponseModel { Message = $"Item written to: CSVFolder", StatusCode = "200" };
         }
     }
 }

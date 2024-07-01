@@ -43,3 +43,11 @@ export interface WhatNotItem {
     imageURL7: string;
     imageURL8: string;
 }
+
+
+export interface JsonResponseObject {
+    message: string;
+    StatusCode: string;
+    ResponseObject: any;
+    ResponseObjects: any[];
+}

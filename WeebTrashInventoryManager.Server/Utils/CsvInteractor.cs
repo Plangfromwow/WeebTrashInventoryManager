@@ -3,6 +3,7 @@ using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,25 @@ namespace WeebTrashInventoryManager
             {
                 csv.WriteRecords(list);
             }
+        }
+
+        //Create the WhatNotFile
+        public void CreateNewWhatNotCSV(List<WhatNotItem> scannedItems)
+        {
+             string csvPath = ".\\CSVs";
+             string newCsv = csvPath + $"\\testOutput{DateTime.Now.ToString("yy-dd-MM")}.csv";
+
+            WriteToNewCSV(newCsv, scannedItems);
+        }
+
+        //GetMetaData
+        public List<ScannedInventoryItem> GetMetaData()
+        {
+
+           string path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
+
+           return ReadFromCSV<ScannedInventoryItem>(path);
+
         }
 
 

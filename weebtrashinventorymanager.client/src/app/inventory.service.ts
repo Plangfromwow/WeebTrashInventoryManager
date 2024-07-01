@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ScannedInventoryItem } from './Models';
+import { JsonResponseObject, ScannedInventoryItem } from './Models';
 
 
 @Injectable({
@@ -15,18 +15,13 @@ export class InventoryService {
     this.http.get("/inventory/AllItems").subscribe(cb);
   }
 
-  getInventoryItemFromScan(cb: any, id: string) {
-    this.http.get<ScannedInventoryItem>(`/inventory/${id}`).subscribe(cb);
+  createCSVFile(cb: any) {
+    this.http.get<JsonResponseObject>(`/inventory/CreateWhatNotCSV/`).subscribe(cb);
   }
 
   //Sets 
-  addInventoryItem(cb: any, newItem: ScannedInventoryItem) {
-    this.http.post<ScannedInventoryItem>("/inventory", newItem).subscribe(cb);
+  addInventoryItem(cb: any, newItem: string) {
+    this.http.get<JsonResponseObject>(`/inventory/addItem?id=${newItem}`).subscribe(cb);
   }
-
-
-
-
-
 
 }

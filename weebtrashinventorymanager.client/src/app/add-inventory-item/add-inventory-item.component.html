@@ -1,22 +1,25 @@
-<p>add-inventory-item works!</p>
-
-
-<input type="text" [(ngModel)]="item.barcodeScan" placeholder="Scan Me"  class="input"/>
-<input type="text" [(ngModel)]="item.category" placeholder="Category" class="input" />
-<input type="text" [(ngModel)]="item.subCategory" placeholder="Category" class="input" />
-<input type="text" [(ngModel)]="item.description" placeholder="Category" class="input" />
-<input type="text" [(ngModel)]="item.price" placeholder="Category" class="input" />
-<input type="text" [(ngModel)]="item.quantity" placeholder="Category" class="input" />
-<input type="text" [(ngModel)]="item.shippingProfile" placeholder="Category" class="input" />
-
-
-
-
-
-
-
-<button (click)="buttonSubmit()" class="btn">Save Button</button>
-<br />
-<ng-container *ngFor="let i of items">
- {{i.barcodeScan}} - {{i.title}} - {{i.description}} <br/>
-</ng-container>
+<div class="grid content-center ml-[25%] mr-[25%]">
+    <h1 class="text-4xl m-4">WeebTrash Inventory Manager</h1>
+    <input type="text" [(ngModel)]="item.barcodeScan" enterWatcher placeholder="Scan Me"  class="input"/> 
+    <button type="submit" (click)="addInventoryItem(item)" class="btn">Add Item</button>
+    
+    
+    <hr>
+    <h1 class="text-2xl">Current Items:</h1>
+    <div>
+        <ng-container *ngFor="let i of currentItems">
+            {{i.barcodeScan}}-{{i.title}} - Quantity: {{i.quantity}}
+            <br>
+        </ng-container>
+    </div>
+    
+    
+    <button (click)="createCSV()" class="btn">Create Whatnot CSV</button>
+    <button (click)="getCurrentList()" class="btn">Get Current WhatNotList</button>
+    <br />
+    <ng-container *ngFor="let i of items">
+        {{i.barcodeScan}} - {{i.title}} - {{i.description}} <br/>
+    </ng-container>
+    
+    <p class="text-2xl">Total:{{total}}</p>
+</div>
