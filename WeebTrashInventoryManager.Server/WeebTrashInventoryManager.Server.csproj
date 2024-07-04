@@ -8,10 +8,17 @@
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
     <PackageIcon>sludgemouth_cute_kawaii_trash_can_icon_black_and_white_anime_li_d64e77c9-1e0a-48c4-9578-797ab81155db.png</PackageIcon>
+    <ApplicationIcon>Assets\WeebTrashIcon.ico</ApplicationIcon>
+    <Title>WeebTrashInventoryManager</Title>
+    <AssemblyVersion>0.0.1</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="CsvMetaDataSave\WeebMetaData.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\WeebTrashIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Assets\sludgemouth_cute_kawaii_trash_can_icon_black_and_white_anime_li_d64e77c9-1e0a-48c4-9578-797ab81155db.png">
+    <None Update="Assets\sludgemouth_cute_kawaii_trash_can_icon_black_and_white_.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
