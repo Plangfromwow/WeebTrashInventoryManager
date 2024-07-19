@@ -1,6 +1,7 @@
 import { HostListener, Component, Directive } from '@angular/core';
 import { ScannedInventoryItem } from '../Models';
 import { InventoryService } from '../inventory.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-inventory-item',
@@ -12,6 +13,25 @@ export class AddInventoryItemComponent {
   constructor(private inventoryS: InventoryService) {
 
   }
+
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  displayFn(user: string): string {
+    return user && user ? user : '';
+  }
+
+  myControl: string = '';
+
+  options: string[] = ['The Dog Jumps Over The Moon',
+    'The Dog Jumps Over The Roof',
+    'The Dog Jumps Over The Butt',
+    'The Dog Jumps Over The Spoon',];
+  filteredOptions!: Observable<string[]>;
 
   item: ScannedInventoryItem =
     {
