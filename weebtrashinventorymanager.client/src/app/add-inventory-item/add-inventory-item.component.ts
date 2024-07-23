@@ -2,6 +2,14 @@ import { HostListener, Component, Directive } from '@angular/core';
 import { ScannedInventoryItem } from '../Models';
 import { InventoryService } from '../inventory.service';
 import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as items from "../../assets/items.json";
+
+interface options {
+  name: string
+}
+
 
 @Component({
   selector: 'app-add-inventory-item',
@@ -21,17 +29,23 @@ export class AddInventoryItemComponent {
     );
   }
 
+  private _filter(value: string): options[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.name.toLowerCase().includes(filterValue))
+  }
+
   displayFn(user: string): string {
     return user && user ? user : '';
   }
 
-  myControl: string = '';
+  myControl = new FormControl('');
 
-  options: string[] = ['The Dog Jumps Over The Moon',
-    'The Dog Jumps Over The Roof',
-    'The Dog Jumps Over The Butt',
-    'The Dog Jumps Over The Spoon',];
-  filteredOptions!: Observable<string[]>;
+
+
+  options: options[] = items.items;
+
+
+  filteredOptions!: Observable<options[]>;
 
   item: ScannedInventoryItem =
     {

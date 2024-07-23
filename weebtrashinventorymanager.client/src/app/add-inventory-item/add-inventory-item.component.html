@@ -2,14 +2,15 @@
     <h1 class="text-4xl m-4">WeebTrash Inventory Manager</h1>
     <input type="text" [(ngModel)]="item.barcodeScan" enterWatcher placeholder="Scan Me"  class="input"/> 
     <input type="text"
+    class="input"
     placeholder="Pick one"
     matInput
-    [(ngModel)]="myControl"
+    [formControl]="myControl"
     [matAutocomplete]="auto"
     >
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        @for (option of filteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
+        @for (option of filteredOptions | async; track option.name) {
+          <mat-option [value]="option.name">{{option.name}}</mat-option>
         }
       </mat-autocomplete>
 
