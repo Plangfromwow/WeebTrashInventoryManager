@@ -30,8 +30,26 @@ export class AddInventoryItemComponent {
   }
 
   private _filter(value: string): options[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue))
+    const filterValue = value.toLowerCase().trim();
+    if (filterValue == '') {
+      return [{ "name": "Please enter some search params..." }]
+    }
+
+    let searchValue = filterValue.split(" ")
+
+    let validpicks: options[] = [];
+
+    for (let i = 0; i < searchValue.length; i++) {
+      if (i == 0) {
+        validpicks = this.options.filter(option => option.name.toLowerCase().includes(searchValue[i]))
+      }
+      else {
+        validpicks = validpicks.filter(option => option.name.toLowerCase().includes(searchValue[i]))
+      }
+    }
+
+    return validpicks
+    // return this.options.filter(option => option.name.toLowerCase().includes(filterValue))
   }
 
   displayFn(user: string): string {
