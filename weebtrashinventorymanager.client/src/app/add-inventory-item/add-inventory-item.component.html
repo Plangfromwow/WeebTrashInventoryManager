@@ -8,9 +8,9 @@
     [formControl]="myControl"
     [matAutocomplete]="auto"
     >
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        @for (option of filteredOptions | async; track option.name) {
-          <mat-option [value]="option.name">{{option.name}}</mat-option>
+    <mat-autocomplete #auto="matAutocomplete">
+        @for (option of filteredOptions | async; track option.Title) {
+          <mat-option [value]="option.Title">{{option.Title}}</mat-option>
         }
       </mat-autocomplete>
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
+using WeebTrashInventoryManager.Server.Models;
 
 namespace WeebTrashInventoryManager.Server.Controllers
 {
@@ -30,6 +31,16 @@ namespace WeebTrashInventoryManager.Server.Controllers
         {
             Console.WriteLine("GetItems Controller hit");
             return itemsToAdd;
+        }
+
+        // Get all data short for Drop Down list for searching 
+        [HttpGet("GetDataShort")]
+        public object GetDataShort()
+        {
+           var data =   ShortData.GetShortData(MetaData);
+
+           return new JsonResponseModel { Message = "Success", ResponseObject = data, StatusCode = "200" };
+
         }
 
         [HttpGet("AddItem")]
@@ -85,5 +96,7 @@ namespace WeebTrashInventoryManager.Server.Controllers
 
             return new JsonResponseModel { Message = $"Item written to: CSVFolder", StatusCode = "200" };
         }
+
+
     }
 }

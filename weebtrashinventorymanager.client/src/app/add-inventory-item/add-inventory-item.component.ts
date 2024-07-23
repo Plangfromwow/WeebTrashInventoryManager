@@ -7,7 +7,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as items from "../../assets/items.json";
 
 interface options {
-  name: string
+  Title: string,
+  Barcode?: string | null
 }
 
 
@@ -18,6 +19,11 @@ interface options {
 })
 export class AddInventoryItemComponent {
 
+
+  myControl = new FormControl('');
+  options: options[] = items.items;
+  filteredOptions!: Observable<options[]>;
+  pickedItem: string = '';
   constructor(private inventoryS: InventoryService) {
 
   }
@@ -29,10 +35,12 @@ export class AddInventoryItemComponent {
     );
   }
 
+
+
   private _filter(value: string): options[] {
     const filterValue = value.toLowerCase().trim();
     if (filterValue == '') {
-      return [{ "name": "Please enter some search params..." }]
+      return [{ "Title": "Please enter some search params...", "Barcode": null }]
     }
 
     let searchValue = filterValue.split(" ")
@@ -41,29 +49,16 @@ export class AddInventoryItemComponent {
 
     for (let i = 0; i < searchValue.length; i++) {
       if (i == 0) {
-        validpicks = this.options.filter(option => option.name.toLowerCase().includes(searchValue[i]))
+        validpicks = this.options.filter(option => option.Title.toLowerCase().includes(searchValue[i]))
       }
       else {
-        validpicks = validpicks.filter(option => option.name.toLowerCase().includes(searchValue[i]))
+        validpicks = validpicks.filter(option => option.Title.toLowerCase().includes(searchValue[i]))
       }
     }
 
     return validpicks
     // return this.options.filter(option => option.name.toLowerCase().includes(filterValue))
   }
-
-  displayFn(user: string): string {
-    return user && user ? user : '';
-  }
-
-  myControl = new FormControl('');
-
-
-
-  options: options[] = items.items;
-
-
-  filteredOptions!: Observable<options[]>;
 
   item: ScannedInventoryItem =
     {
@@ -108,38 +103,14 @@ export class AddInventoryItemComponent {
   }
 
   addInventoryItem(item: ScannedInventoryItem) {
+    console.log(this.myControl);
+
+
     if (item.barcodeScan != null && item.barcodeScan != undefined && item.barcodeScan != '') {
       console.log("Add Item ran" + item.barcodeScan.toString());
 
       this.inventoryS.addInventoryItem((result: any) => {
-        // let newItem: ScannedInventoryItem = {
-        //   barcodeScan: result.responseObject.barcodeScan,
-        //   category: '',
-        //   subCategory: '',
-        //   title: result.responseObject.title,
-        //   description: result.responseObject.description,
-        //   quantity: result.responseObject.quantity,
-        //   whatNotType: '',
-        //   price: '',
-        //   shippingProfile: '',
-        //   gradable: '',
-        //   offerable: '',
-        //   hazmat: '',
-        //   imageURL1: '',
-        //   imageURL2: '',
-        //   imageURL3: '',
-        //   imageURL4: '',
-        //   imageURL5: '',
-        //   imageURL6: '',
-        //   imageURL7: '',
-        //   imageURL8: ''
-        // }
-
-        //this.currentItems.push(newItem)
-
         this.currentItems = result.responseObject
-
-
       }, item.barcodeScan)
       this.item.barcodeScan = '';
       this.currentItems.forEach(item => {
