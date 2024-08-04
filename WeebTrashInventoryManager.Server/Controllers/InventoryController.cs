@@ -34,9 +34,11 @@ namespace WeebTrashInventoryManager.Server.Controllers
         }
 
         // Get all data short for Drop Down list for searching 
-        [HttpGet("GetDataShort")]
-        public object GetDataShort()
+        [HttpGet("AllDataShort")]
+        public object AllDataShort()
         {
+            Console.WriteLine("AllDataShortHit");
+
            var data =   ShortData.GetShortData(MetaData);
 
            return new JsonResponseModel { Message = "Success", ResponseObject = data, StatusCode = "200" };

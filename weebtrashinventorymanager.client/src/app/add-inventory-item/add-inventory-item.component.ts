@@ -7,8 +7,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as items from "../../assets/items.json";
 
 interface options {
-  Title: string,
-  Barcode?: string | null
+  name: string,
+  barcodeScan?: string | null
 }
 
 
@@ -21,7 +21,8 @@ export class AddInventoryItemComponent {
 
 
   myControl = new FormControl('');
-  options: options[] = items.items;
+  options: options[] = [{ name: "No Data", barcodeScan: "" }];
+
   filteredOptions!: Observable<options[]>;
   pickedItem: string = '';
 
@@ -34,6 +35,11 @@ export class AddInventoryItemComponent {
       startWith(''),
       map(value => this._filter(value || '')),
     );
+
+    this.inventoryS.getAutoCompleteData((result: any) => {
+
+      this.options = result.responseObject;
+    })
   }
 
 
@@ -41,19 +47,26 @@ export class AddInventoryItemComponent {
   private _filter(value: string): options[] {
     const filterValue = value.toLowerCase().trim();
     if (filterValue == '') {
-      return [{ "Title": "Type to start searching...", "Barcode": null }]
+      return [{ "name": "Type to start searching...", "barcodeScan": null }]
     }
 
     let searchValue = filterValue.split(" ")
 
     let validpicks: options[] = [];
 
+
     for (let i = 0; i < searchValue.length; i++) {
       if (i == 0) {
-        validpicks = this.options.filter(option => option.Title.toLowerCase().includes(searchValue[i]))
+        validpicks = this.options.filter(option => option.name.toLowerCase().includes(searchValue[i]))
+        this.item.barcodeScan = '';
       }
       else {
-        validpicks = validpicks.filter(option => option.Title.toLowerCase().includes(searchValue[i]))
+        this.item.barcodeScan = '';
+        validpicks = validpicks.filter(option => option.name.toLowerCase().includes(searchValue[i]))
+      }
+
+      if (validpicks.length === 1) {
+        this.item.barcodeScan = validpicks[0].barcodeScan ? validpicks[0].barcodeScan : "No Barcode Found";
       }
     }
 
@@ -93,7 +106,6 @@ export class AddInventoryItemComponent {
 
   buttonSubmit() {
     let barcodeScan: String = this.item.barcodeScan.toString();
-    console.log(`The button was pressed. Item Barcode: ${barcodeScan}`)
     this.item.barcodeScan = '';
   }
 
@@ -104,16 +116,14 @@ export class AddInventoryItemComponent {
   }
 
   addInventoryItem() {
-    console.log(this.myControl);
-    console.log(this.item)
 
     if (this.item.barcodeScan != null && this.item.barcodeScan != undefined && this.item.barcodeScan != '') {
-      console.log("Add Item ran" + this.item.barcodeScan.toString());
 
       this.inventoryS.addInventoryItem((result: any) => {
         this.currentItems = result.responseObject
       }, this.item.barcodeScan)
       this.item.barcodeScan = '';
+      this.myControl.setValue('')
       this.currentItems.forEach(item => {
         let int = parseInt(item.quantity)
         this.total = this.total + int;
@@ -124,12 +134,20 @@ export class AddInventoryItemComponent {
 
   getCurrentList() {
     this.inventoryS.getInventoryItems((result: any) => {
+      this.total = 0
       this.currentItems = result;
       this.currentItems.forEach(item => {
         let int = parseInt(item.quantity)
         this.total = this.total + int;
       });
     })
+  }
+
+  createCSV() {
+    this.inventoryS.createCSVFile((result: any) => {
+      console.log(result);
+      this.currentItems = [];
+    });
   }
 
 }
