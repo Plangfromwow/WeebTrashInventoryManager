@@ -24,4 +24,9 @@ export class InventoryService {
     this.http.get<JsonResponseObject>(`/inventory/addItem?id=${newItem}`).subscribe(cb);
   }
 
+  // Get autocomplete data 
+  getAutoCompleteData(cb: any) {
+    this.http.get("/inventory/AllDataShort").subscribe(cb);
+  }
+
 }
