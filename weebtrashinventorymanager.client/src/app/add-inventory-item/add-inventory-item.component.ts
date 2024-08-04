@@ -24,6 +24,7 @@ export class AddInventoryItemComponent {
   options: options[] = items.items;
   filteredOptions!: Observable<options[]>;
   pickedItem: string = '';
+
   constructor(private inventoryS: InventoryService) {
 
   }
@@ -40,7 +41,7 @@ export class AddInventoryItemComponent {
   private _filter(value: string): options[] {
     const filterValue = value.toLowerCase().trim();
     if (filterValue == '') {
-      return [{ "Title": "Please enter some search params...", "Barcode": null }]
+      return [{ "Title": "Type to start searching...", "Barcode": null }]
     }
 
     let searchValue = filterValue.split(" ")
@@ -99,19 +100,19 @@ export class AddInventoryItemComponent {
 
   @HostListener('document:keydown.enter', ['$event'])
   eventListener(event: any) {
-    this.addInventoryItem(this.item);
+    this.addInventoryItem();
   }
 
-  addInventoryItem(item: ScannedInventoryItem) {
+  addInventoryItem() {
     console.log(this.myControl);
+    console.log(this.item)
 
-
-    if (item.barcodeScan != null && item.barcodeScan != undefined && item.barcodeScan != '') {
-      console.log("Add Item ran" + item.barcodeScan.toString());
+    if (this.item.barcodeScan != null && this.item.barcodeScan != undefined && this.item.barcodeScan != '') {
+      console.log("Add Item ran" + this.item.barcodeScan.toString());
 
       this.inventoryS.addInventoryItem((result: any) => {
         this.currentItems = result.responseObject
-      }, item.barcodeScan)
+      }, this.item.barcodeScan)
       this.item.barcodeScan = '';
       this.currentItems.forEach(item => {
         let int = parseInt(item.quantity)
@@ -120,16 +121,6 @@ export class AddInventoryItemComponent {
     }
   }
 
-
-
-  createCSV() {
-
-    this.inventoryS.createCSVFile((result: any) => {
-      console.log(result);
-      this.currentItems = [];
-    });
-
-  }
 
   getCurrentList() {
     this.inventoryS.getInventoryItems((result: any) => {
