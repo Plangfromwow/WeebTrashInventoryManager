@@ -1,6 +1,7 @@
 {
   "name": "weebtrashinventorymanager.client",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "run-script-os",
@@ -9,7 +10,9 @@
     "test": "ng test",
     "prestart": "node aspnetcore-https",
     "start:windows": "ng serve --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\" --host=127.0.0.1",
-    "start:default": "ng serve --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\" --host=127.0.0.1"
+    "start:default": "ng serve --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\" --host=127.0.0.1",
+    "electron": "ng build --configuration development && electron main.js --watch",
+    "elec": "electron . --watch"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +39,7 @@
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.12.2",
+    "electron": "^31.3.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
