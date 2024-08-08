@@ -115,15 +115,23 @@ export class AddInventoryItemComponent {
     this.addInventoryItem();
   }
 
-  addInventoryItem() {
+  failResponse = false;
 
+  addInventoryItem() {
+    this.failResponse = false;
     if (this.item.barcodeScan != null && this.item.barcodeScan != undefined && this.item.barcodeScan != '') {
 
       this.inventoryS.addInventoryItem((result: any) => {
+        if (result.statusCode === "404") {
+          this.failResponse = true;
+          return;
+        }
         this.currentItems = result.responseObject
+
       }, this.item.barcodeScan)
       this.item.barcodeScan = '';
       this.myControl.setValue('')
+      this.total = 0;
       this.currentItems.forEach(item => {
         let int = parseInt(item.quantity)
         this.total = this.total + int;
