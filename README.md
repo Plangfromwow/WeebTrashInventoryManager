@@ -47,3 +47,5 @@ Got questions or ideas? Feel free to reach out via Discord `@Plang` or shoot an 
 
 Thanks for checking out WeebTrash Inventory Manager! Now, go forth and auction like the big dog you are! 🐕
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/plang)
+
