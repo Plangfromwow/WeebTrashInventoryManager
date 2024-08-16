@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using WeebTrashInventoryManager.Server.Models;
@@ -27,10 +28,17 @@ namespace WeebTrashInventoryManager.Server.Controllers
         }
 
         [HttpGet("AllItems")]
-        public List<ScannedInventoryItem> GetItems()
+        public object GetItems()
         {
             Console.WriteLine("GetItems Controller hit");
-            return itemsToAdd;
+
+            AllItemsResponseObject data = new AllItemsResponseObject()
+                {
+                    Total = itemsToAdd.Count, 
+                    Items = itemsToAdd
+                };
+
+            return new JsonResponseModel { Message = "Success", ResponseObject = data, StatusCode = "200" };
         }
 
         // Get all data short for Drop Down list for searching 
@@ -48,6 +56,7 @@ namespace WeebTrashInventoryManager.Server.Controllers
         [HttpGet("AddItem")]
         public object AddItem(string id)
         {
+            AllItemsResponseObject data = new AllItemsResponseObject();
             Console.WriteLine("Get items controller hit.");
             bool exists = false;
             foreach (ScannedInventoryItem item in MetaData)
@@ -67,12 +76,19 @@ namespace WeebTrashInventoryManager.Server.Controllers
                     }
                     if(exists == false)
                         itemsToAdd.Add(item);
-                    return new JsonResponseModel { Message="Success", ResponseObject = itemsToAdd, StatusCode= "200" };
+                    data = GetResponseObject();
+                    return new JsonResponseModel { Message="Success", ResponseObject = data, StatusCode= "200" };
                     
                 }
             }
+            data = GetResponseObject() ;
+            return new JsonResponseModel { Message = "Item not found", ResponseObject = data, StatusCode = "404"};
+        }
 
-            return new JsonResponseModel { Message = "Item not found", ResponseObject = itemsToAdd, StatusCode = "404"};
+        public AllItemsResponseObject GetResponseObject()
+        {
+            var data = new AllItemsResponseObject() {Total = itemsToAdd.Count,Items = itemsToAdd };
+            return data;
         }
 
         public class ScannedItemResponse

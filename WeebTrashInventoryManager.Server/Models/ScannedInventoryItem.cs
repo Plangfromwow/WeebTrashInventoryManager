@@ -98,4 +98,11 @@ namespace WeebTrashInventoryManager
         public List<object>? ResponseObjects { get; set; }
 
     }
+
+    public class AllItemsResponseObject 
+    {
+        public int? Total { get; set; }
+        public List<ScannedInventoryItem> Items { get; set; }
+    }
+
 }

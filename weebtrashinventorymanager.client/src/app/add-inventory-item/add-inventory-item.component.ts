@@ -70,6 +70,10 @@ export class AddInventoryItemComponent {
       }
     }
 
+    if (validpicks.length > 10) {
+      validpicks = validpicks.slice(0, 10)
+      return validpicks
+    }
     return validpicks
     // return this.options.filter(option => option.name.toLowerCase().includes(filterValue))
   }
@@ -126,28 +130,21 @@ export class AddInventoryItemComponent {
           this.failResponse = true;
           return;
         }
-        this.currentItems = result.responseObject
-
+        this.currentItems = result.responseObject.items
+        this.total = result.responseObject.total
       }, this.item.barcodeScan)
       this.item.barcodeScan = '';
       this.myControl.setValue('')
       this.total = 0;
-      this.currentItems.forEach(item => {
-        let int = parseInt(item.quantity)
-        this.total = this.total + int;
-      });
+
     }
   }
 
 
   getCurrentList() {
     this.inventoryS.getInventoryItems((result: any) => {
-      this.total = 0
-      this.currentItems = result;
-      this.currentItems.forEach(item => {
-        let int = parseInt(item.quantity)
-        this.total = this.total + int;
-      });
+      this.total = result.responseObject.total
+      this.currentItems = result.responseObject.items;
     })
   }
 
