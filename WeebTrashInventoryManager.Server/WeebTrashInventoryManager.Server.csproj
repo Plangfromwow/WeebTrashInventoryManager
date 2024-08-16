@@ -9,7 +9,7 @@
     <PackageIcon>sludgemouth_cute_kawaii_trash_can_icon_black_and_white_anime_li_d64e77c9-1e0a-48c4-9578-797ab81155db.png</PackageIcon>
     <ApplicationIcon>Assets\WeebTrashIcon.ico</ApplicationIcon>
     <Title>WeebTrashInventoryManager</Title>
-    <AssemblyVersion>0.0.2</AssemblyVersion>
+    <AssemblyVersion>0.0.21</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="CsvMetaDataSave\WeebMetaData.csv" />
