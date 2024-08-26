@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace WeebTrashInventoryManager
 {
-    public  class CsvInteractor
+    public class CsvInteractor
     {
 
         //All functions need to be generic 
         // Read 
 
-        public  List<T> ReadFromCSV<T>(string path)
+        public List<T> ReadFromCSV<T>(string path)
         {
             List<T> list = new List<T>();
             //Reading from a CSV 
@@ -44,7 +44,7 @@ namespace WeebTrashInventoryManager
         //Write functions
         //CreateNewFileWrite 
 
-        public  void WriteToNewCSV<T>(string path, List<T> list)
+        public void WriteToNewCSV<T>(string path, List<T> list)
         {
 
             using (var writer = new StreamWriter(path))
@@ -56,7 +56,7 @@ namespace WeebTrashInventoryManager
 
         //Append 
 
-        public  void AppendToCSV<T>(string path, List<T> list)
+        public void AppendToCSV<T>(string path, List<T> list)
         {
             var appendConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -75,8 +75,8 @@ namespace WeebTrashInventoryManager
         //Create the WhatNotFile
         public void CreateNewWhatNotCSV(List<WhatNotItem> scannedItems)
         {
-             string csvPath = ".\\CSVs";
-             string newCsv = csvPath + $"\\testOutput{DateTime.Now.ToString("yy-dd-MM")}.csv";
+            string csvPath = ".\\CSVs";
+            string newCsv = csvPath + $"\\testOutput{DateTime.Now.ToString("yy-dd-MM")}.csv";
 
             WriteToNewCSV(newCsv, scannedItems);
         }
@@ -85,13 +85,21 @@ namespace WeebTrashInventoryManager
         public List<ScannedInventoryItem> GetMetaData()
         {
 
-           string path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
+            string path = "";
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
+            }
+            else
+            {
+                path = "./CsvMetaDataSave/WeebMetaData.csv";
+            }
 
-           return ReadFromCSV<ScannedInventoryItem>(path);
+            return ReadFromCSV<ScannedInventoryItem>(path);
 
         }
 
-        
+
 
 
     }

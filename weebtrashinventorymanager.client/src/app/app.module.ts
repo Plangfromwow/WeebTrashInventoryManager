@@ -10,12 +10,18 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatAutocomplete, MatAutocompleteModule, MatOption } from '@angular/material/autocomplete'
 import { AsyncPipe } from '@angular/common';
-import { MatInput } from '@angular/material/input'
+import { MatInput } from '@angular/material/input';
+import { NavigationComponent } from './navigation/navigation.component';
+import { HomeComponent } from './home/home.component'
+import { LowerCaseUrlSerializer } from './util/UrlSerializer';
+import { UrlSerializer } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddInventoryItemComponent,
+    NavigationComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,11 @@ import { MatInput } from '@angular/material/input'
     MatInput,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: UrlSerializer,
+      useClass: LowerCaseUrlSerializer
+    }
   ],
   bootstrap: [AppComponent]
 })

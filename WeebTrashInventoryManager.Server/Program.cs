@@ -16,16 +16,16 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
- IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseElectron(args);
-            webBuilder.UseStartup<StartupBase>();
-        });
+IHostBuilder CreateHostBuilder(string[] args) =>
+   Host.CreateDefaultBuilder(args)
+       .ConfigureWebHostDefaults(webBuilder =>
+       {
+           webBuilder.UseElectron(args);
+           webBuilder.UseStartup<StartupBase>();
+       });
 
 
- async void ElectronBootstrap()
+async void ElectronBootstrap()
 {
     BrowserWindowOptions options = new BrowserWindowOptions
     {
@@ -50,10 +50,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    await Electron.WindowManager.CreateWindowAsync();
+    // await Electron.WindowManager.CreateWindowAsync();
 
-    ElectronBootstrap();
-    
+    // ElectronBootstrap();
+
 }
 
 app.UseHttpsRedirection();
