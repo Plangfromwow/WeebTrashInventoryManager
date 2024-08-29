@@ -15,6 +15,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component'
 import { LowerCaseUrlSerializer } from './util/UrlSerializer';
 import { UrlSerializer } from '@angular/router';
+import { UpdateMetaDataComponent } from './update-meta-data/update-meta-data.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UrlSerializer } from '@angular/router';
     AddInventoryItemComponent,
     NavigationComponent,
     HomeComponent,
+    UpdateMetaDataComponent,
   ],
   imports: [
     BrowserModule,
