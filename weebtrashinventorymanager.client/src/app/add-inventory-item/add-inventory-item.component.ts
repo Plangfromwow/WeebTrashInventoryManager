@@ -56,6 +56,7 @@ export class AddInventoryItemComponent {
 
 
     for (let i = 0; i < searchValue.length; i++) {
+
       if (i == 0) {
         validpicks = this.options.filter(option => option.name.toLowerCase().includes(searchValue[i]))
         this.item.barcodeScan = '';

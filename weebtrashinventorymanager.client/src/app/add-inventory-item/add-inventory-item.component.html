@@ -1,8 +1,20 @@
 <div class="grid content-center ml-[25%] mr-[25%]">
   <h1 class="text-4xl m-4">WeebTrash Inventory Manager</h1>
-  <input type="text" [(ngModel)]="item.barcodeScan" enterWatcher placeholder="Scan Me" class="input" />
-  <input type="text" class="input" placeholder="Search by name..." matInput [formControl]="myControl"
-    [matAutocomplete]="auto" />
+  <input
+    type="text"
+    [(ngModel)]="item.barcodeScan"
+    enterWatcher
+    placeholder="Scan Me"
+    class="input"
+  />
+  <input
+    type="text"
+    class="input"
+    placeholder="Search by name..."
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+  />
   <mat-autocomplete #auto="matAutocomplete">
     @for (option of filteredOptions | async; track option.name) {
     <mat-option [value]="option.name">{{ option.name }}</mat-option>
@@ -39,6 +51,5 @@
         <span>No item found, failed to add!</span>
       </div>
     </div>
-
   </ng-container>
 </div>

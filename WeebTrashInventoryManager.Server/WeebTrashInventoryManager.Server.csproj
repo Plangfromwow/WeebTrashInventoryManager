@@ -12,13 +12,13 @@
     <AssemblyVersion>0.0.21</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="CsvMetaDataSave\WeebMetaData.csv" />
+    <None Remove="MetaDataSave\WeebMetaData.csv" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\WeebTrashIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CsvMetaDataSave\WeebMetaData.csv">
+    <EmbeddedResource Include="MetaDataSave\WeebMetaData.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

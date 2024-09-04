@@ -88,11 +88,11 @@ namespace WeebTrashInventoryManager
             string path = "";
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                path = ".\\CsvMetaDataSave\\WeebMetaData.csv";
+                path = ".\\MetaDataSave\\WeebMetaData.csv";
             }
             else
             {
-                path = "./CsvMetaDataSave/WeebMetaData.csv";
+                path = "./MetaDataSave/WeebMetaData.csv";
             }
 
             return ReadFromCSV<ScannedInventoryItem>(path);
