@@ -47,6 +47,7 @@ export class AddInventoryItemComponent {
   private _filter(value: string): options[] {
     const filterValue = value.toLowerCase().trim();
     if (filterValue == '') {
+      this.item.barcodeScan = ''
       return [{ "name": "Type to start searching...", "barcodeScan": null }]
     }
 
@@ -69,6 +70,7 @@ export class AddInventoryItemComponent {
       if (validpicks.length === 1) {
         this.item.barcodeScan = validpicks[0].barcodeScan ? validpicks[0].barcodeScan : "No Barcode Found";
       }
+
     }
 
     if (validpicks.length > 10) {
