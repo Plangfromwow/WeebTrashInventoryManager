@@ -1,128 +1,160 @@
 <div class="grid content-center ml-[25%] mr-[25%]">
   <h1 class="text-4xl m-4">Update Meta data</h1>
+  <label class="label cursor-pointer">
+    <span class="label-text">Create New</span>
+    <input
+      type="checkbox"
+      class="checkbox checkbox-primary"
+      [(ngModel)]="AddNew"
+    />
+  </label>
 
-  <div class="gap-2 w-full">
-    <input
-      type="text"
-      [(ngModel)]="item.barcodeScan"
-      enterWatcher
-      placeholder="Barcode Number"
-      class="input bg-slate-400 w-full m-2"
-    />
+  <ng-container *ngIf="AddNew">
+    <div class="gap-2 w-full">
+      <div id="images" class="grid grid-cols-4 w-full custom-margin gap-5">
+        <input
+          id="barcodeScan"
+          type="text"
+          [(ngModel)]="item.barcodeScan"
+          enterWatcherH
+          placeholder="Barcode"
+          class="input bg-slate-800 w-full m-2"
+        />
 
-    <input
-      type="text"
-      [(ngModel)]="item.category"
-      placeholder="Category"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.subCategory"
-      placeholder="Sub Category"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.title"
-      placeholder="Title"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.description"
-      placeholder="Description"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Quantity"
-      [(ngModel)]="item.quantity"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="WhatNotType"
-      [(ngModel)]="item.whatNotType"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.price"
-      placeholder="Price"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Shipping Profile"
-      [(ngModel)]="item.shippingProfile"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Gradable"
-      [(ngModel)]="item.gradable"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Offerable"
-      [(ngModel)]="item.offerable"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Hazmat"
-      [(ngModel)]="item.hazmat"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Image URL 1"
-      [(ngModel)]="item.imageURL1"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Image URL 1"
-      [(ngModel)]="item.imageURL2"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Image URL 1"
-      [(ngModel)]="item.imageURL3"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.imageURL4"
-      placeholder="Image URL 1"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.imageURL5"
-      placeholder="Image URL 1"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.imageURL6"
-      placeholder="Image URL 1"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      [(ngModel)]="item.imageURL7"
-      placeholder="Image URL 1"
-      class="input bg-slate-400 w-full m-2"
-    />
-    <input
-      type="text"
-      placeholder="Image URL 1"
-      [(ngModel)]="item.imageURL8"
-      class="input bg-slate-400 w-full m-2"
-    />
-  </div>
+        <input
+          id="category"
+          type="text"
+          [(ngModel)]="item.category"
+          placeholder="Category"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="subCategory"
+          type="text"
+          [(ngModel)]="item.subCategory"
+          placeholder="Sub Category"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="title"
+          type="text"
+          [(ngModel)]="item.title"
+          placeholder="Title"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="description"
+          type="text"
+          [(ngModel)]="item.description"
+          placeholder="Description"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="quantity"
+          type="text"
+          placeholder="Quantity"
+          [(ngModel)]="item.quantity"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="whatNotType"
+          type="text"
+          placeholder="WhatNotType"
+          [(ngModel)]="item.whatNotType"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="price"
+          type="text"
+          [(ngModel)]="item.price"
+          placeholder="Price"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="shippingProfile"
+          type="text"
+          placeholder="Shipping Profile"
+          [(ngModel)]="item.shippingProfile"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="gradable"
+          type="text"
+          placeholder="Gradable"
+          [(ngModel)]="item.gradable"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="offerable"
+          type="text"
+          placeholder="Offerable"
+          [(ngModel)]="item.offerable"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="hazmat"
+          type="text"
+          placeholder="Hazmat"
+          [(ngModel)]="item.hazmat"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL1"
+          type="text"
+          placeholder="Image URL 1"
+          [(ngModel)]="item.imageURL1"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL2"
+          type="text"
+          placeholder="Image URL 2"
+          [(ngModel)]="item.imageURL2"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL3"
+          type="text"
+          placeholder="Image URL 3"
+          [(ngModel)]="item.imageURL3"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL4"
+          type="text"
+          [(ngModel)]="item.imageURL4"
+          placeholder="Image URL 4"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL5"
+          type="text"
+          [(ngModel)]="item.imageURL5"
+          placeholder="Image URL 5"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL6"
+          type="text"
+          [(ngModel)]="item.imageURL6"
+          placeholder="Image URL 6"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL7"
+          type="text"
+          [(ngModel)]="item.imageURL7"
+          placeholder="Image URL 7"
+          class="input bg-slate-800 w-full m-2"
+        />
+        <input
+          id="imageURL8"
+          type="text"
+          placeholder="Image URL 8"
+          [(ngModel)]="item.imageURL8"
+          class="input bg-slate-800 w-full m-2"
+        />
+      </div>
+    </div>
+  </ng-container>
 </div>

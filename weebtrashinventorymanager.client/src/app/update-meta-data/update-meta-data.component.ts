@@ -7,6 +7,8 @@ import { ScannedInventoryItem } from '../Models';
   styleUrl: './update-meta-data.component.css'
 })
 export class UpdateMetaDataComponent {
+
+  AddNew = false;
   item: ScannedInventoryItem =
     {
       barcodeScan: '',
