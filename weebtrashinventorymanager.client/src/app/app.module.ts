@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component'
 import { LowerCaseUrlSerializer } from './util/UrlSerializer';
 import { UrlSerializer } from '@angular/router';
 import { UpdateMetaDataComponent } from './update-meta-data/update-meta-data.component';
+import { CreateSquareCsvComponent } from './create-square-csv/create-square-csv.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UpdateMetaDataComponent } from './update-meta-data/update-meta-data.com
     NavigationComponent,
     HomeComponent,
     UpdateMetaDataComponent,
+    CreateSquareCsvComponent,
   ],
   imports: [
     BrowserModule,

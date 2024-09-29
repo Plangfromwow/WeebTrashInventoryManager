@@ -85,6 +85,8 @@ namespace WeebTrashInventoryManager
         public List<ScannedInventoryItem> GetMetaData()
         {
 
+
+
             string path = "";
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {

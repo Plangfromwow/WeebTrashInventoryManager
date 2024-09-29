@@ -1,10 +1,16 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration.Attributes;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeebTrashInventoryManager
 {
+    [Keyless]
     public class WhatNotItem
     {
+        //[Key]
+        //[Name("ID")]
+        //public int Id { get; set; }
         [Name("Category")]
         public string Category { get; set; }
         [Name("Sub Category")]

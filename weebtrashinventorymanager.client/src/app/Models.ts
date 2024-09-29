@@ -20,7 +20,10 @@ export interface ScannedInventoryItem {
     imageURL7: string;
     imageURL8: string;
 }
-
+export interface options {
+    name: string,
+    barcodeScan?: string | null
+}
 
 export interface WhatNotItem {
     category: string;

@@ -47,6 +47,11 @@ namespace WeebTrashInventoryManager.Server.Controllers
         {
             Console.WriteLine("AllDataShortHit");
 
+            var context = new InventoryContext();
+
+            context.Add(MetaData[1]);
+            context.SaveChanges();
+
            var data =   ShortData.GetShortData(MetaData);
 
            return new JsonResponseModel { Message = "Success", ResponseObject = data, StatusCode = "200" };

@@ -1,22 +1,17 @@
 import { HostListener, Component, Directive } from '@angular/core';
 import { ScannedInventoryItem, options } from '../Models';
 import { InventoryService } from '../inventory.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscribable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as items from "../../assets/items.json";
 
-
-
-
 @Component({
-  selector: 'app-add-inventory-item',
-  templateUrl: './add-inventory-item.component.html',
-  styleUrl: './add-inventory-item.component.css'
+  selector: 'app-create-square-csv',
+  templateUrl: './create-square-csv.component.html',
+  styleUrl: './create-square-csv.component.css'
 })
-export class AddInventoryItemComponent {
-
-
+export class CreateSquareCsvComponent {
   myControl = new FormControl('');
   options: options[] = [{ name: "No Data", barcodeScan: "" }];
 
