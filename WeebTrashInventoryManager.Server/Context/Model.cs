@@ -6,8 +6,8 @@ namespace WeebTrashInventoryManager
 {
     public class InventoryContext : DbContext
     {
-        public DbSet<WhatNotItem> WhatNotItems { get; set; }
-        public DbSet<ScannedInventoryItem> scannedInventoryItems { get; set; }
+        public DbSet<DBWhatnotItem> WhatNotItems { get; set; }
+        public DbSet<DBScannedWhatnotItem> scannedInventoryItems { get; set; }
 
         public string dbPath { get; set; }
 
